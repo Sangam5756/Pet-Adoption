@@ -1,3 +1,7 @@
+import jwt from "jsonwebtoken";
+import { configDotenv } from "dotenv";
+configDotenv();
+
 export const authToken = async (req, res, next) => {
   try {
     const token = req.cookies?.token || "";   
@@ -8,8 +12,9 @@ export const authToken = async (req, res, next) => {
         message: "please login",
       });
     }
+    
 
-    jwt.verify(token, process.env.SECRET_KEY, (err, decode) => {
+    jwt.verify(token, process.env.SECRET_CODE, (err, decode) => {
       if (err) {
         console.log("err in auth", err);
       }

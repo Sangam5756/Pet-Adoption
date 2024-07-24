@@ -1,13 +1,22 @@
-// controllers/animalController.js
+
 import Animal from "../models/pet.model.js";
 
 
 export const getAllAnimals = async (req, res) => {
   try {
     const animals = await Animal.find();
-    res.json(animals);
+    res.json({
+      data: animals,
+      message: "all pets",
+      success: true,
+      error: false,
+    });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(400).json({
+      message: err,
+      success: false,
+      error: true,
+    });
   }
 };
 
@@ -15,10 +24,19 @@ export const getAllAnimals = async (req, res) => {
 export const getAnimalById = async (req, res) => {
   try {
     const animal = await Animal.findById(req.body);
-    if (!animal) return res.status(404).json({ message: 'Animal not found' });
-    res.json(animal);
+    if (!animal) return res.status(404).json({ message: "Animal not found" });
+    res.json({
+      data: animal,
+      message: "pet by id",
+      success: true,
+      error: false,
+    });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({
+      message: err,
+      success: false,
+      error: true,
+    });
   }
 };
 
@@ -27,11 +45,20 @@ export const getAnimalById = async (req, res) => {
 export const createAnimal = async (req, res) => {
   const animal = new Animal(req.body);
   try {
-    
     const newAnimal = await animal.save();
-    res.status(201).json(newAnimal);
+
+    res.status(201).json({
+      message: "pet added successfully",
+      data: newAnimal,
+      success: true,
+      error: false,
+    });
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(400).json({
+      message: err,
+      success: false,
+      error: true,
+    });
   }
 };
 
@@ -41,27 +68,28 @@ export const updateAnimal = async (req, res) => {
 
   try {
     const animal = await Animal.findById(id);
-    if (!animal) return res.status(404).json({ message: 'Animal not found' });
+    if (!animal) return res.status(404).json({ message: "Animal not found" });
 
     // Update only the fields that are provided in the request body
     if (updateData.name) animal.name = updateData.name;
     if (updateData.breed) animal.breed = updateData.breed;
     if (updateData.age) animal.age = updateData.age;
-    if (updateData.adoptionStatus) animal.adoptionStatus = updateData.adoptionStatus;
+    if (updateData.adoptionStatus)
+      animal.adoptionStatus = updateData.adoptionStatus;
     if (updateData.imageUrl) animal.imageUrl = updateData.imageUrl;
 
     const updatedAnimal = await animal.save();
     res.json({
-      message: 'Animal updated successfully',
+      message: "pet updated successfully",
       data: updatedAnimal,
       success: true,
-      error: false
+      error: false,
     });
   } catch (err) {
     res.status(400).json({
       message: err.message,
       success: false,
-      error: true
+      error: true,
     });
   }
 };
@@ -70,13 +98,15 @@ export const updateAnimal = async (req, res) => {
 export const deleteAnimal = async (req, res) => {
   try {
     const animal = await Animal.findById(req.body);
-    if (!animal) return res.status(404).json({ message: 'Animal not found' });
+    if (!animal) return res.status(404).json({ message: "Animal not found" });
 
     await animal.deleteOne();
-    res.json({ message: 'Animal removed' });
+    res.json({ message: "Animal removed" });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(400).json({
+      message: err,
+      success: false,
+      error: true,
+    });
   }
 };
-
-
