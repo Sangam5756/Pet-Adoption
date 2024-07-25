@@ -11,11 +11,16 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Your frontend URL
+    // optionsSuccessStatus: 200,
+    credentials: true,
+  })
+);
 
-app.use(cors());
 
-
-// api
+// apiz
 app.use("/api", router);
 
 

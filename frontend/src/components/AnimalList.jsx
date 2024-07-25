@@ -1,9 +1,15 @@
-import React from 'react'
+import AnimalCard from './AnimalCard';
 
-const AnimalList = () => {
+const AnimalList = ({animals}) => {
+
+  console.log(animals)
   return (
-    <div>AnimalList</div>
-  )
-}
+    <div className="grid  grid-cols-1 lg:grid-cols-4">
+      {animals.map((animal) => (
+        <AnimalCard key={animal._id} animalid ={animal._id} animal={animal} />
+      ))}
+    </div>
+  );
+};
 
-export default AnimalList
+export default AnimalList;

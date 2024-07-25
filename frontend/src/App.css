@@ -1,0 +1,12 @@
+.animal-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px;
+    text-align: center;
+  }
+  
+  .animal-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  

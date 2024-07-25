@@ -1,16 +1,14 @@
 import jwt from "jsonwebtoken";
-import { configDotenv } from "dotenv";
-configDotenv();
 
 export const authToken = async (req, res, next) => {
   try {
-    const token = req.cookies?.token || "";   
-    console.log(token)
+    let token = req.cookies?.token || "";   
+    console.log("token",token)
 
     if (!token) {
       return res.status(400).json({
         message: "please login",
-      });
+      });z
     }
     
 
@@ -18,8 +16,10 @@ export const authToken = async (req, res, next) => {
       if (err) {
         console.log("err in auth", err);
       }
-
-      req.userId = decode?.id;
+      console.log(decode)
+      req.id = decode.id;
+      console.log("req.id",req.id)
+      
       next();
     });
   } catch (error) {

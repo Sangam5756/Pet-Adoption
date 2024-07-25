@@ -1,5 +1,22 @@
-
 import Animal from "../models/pet.model.js";
+
+export const getAvailableAnimals = async (req, res) => {
+  try {
+    const animals = await Animal.find({ adoptionStatus: 'available' });
+    res.json({
+      data: animals,
+      message: "all pets",
+      success: true,
+      error: false,
+    });
+  } catch (err) {
+    res.status(400).json({
+      message: err,
+      success: false,
+      error: true,
+    });
+  }
+};
 
 
 export const getAllAnimals = async (req, res) => {
@@ -41,9 +58,9 @@ export const getAnimalById = async (req, res) => {
 };
 
 
-
 export const createAnimal = async (req, res) => {
-  const animal = new Animal(req.body);
+  // const animal = new Animal(req.body);
+  
   try {
     const newAnimal = await animal.save();
 
@@ -62,26 +79,30 @@ export const createAnimal = async (req, res) => {
   }
 };
 
+
 export const updateAnimal = async (req, res) => {
   const { id } = req.params;
   const updateData = req.body;
 
+  console.log(req.body)
+  // const {status} = req.body
+
+  // console.log(status)
+
   try {
     const animal = await Animal.findById(id);
-    if (!animal) return res.status(404).json({ message: "Animal not found" });
+    console.log(animal)
+    
+    // if (!animal) return res.status(404).json({ message: "Animal not found" });
 
     // Update only the fields that are provided in the request body
-    if (updateData.name) animal.name = updateData.name;
-    if (updateData.breed) animal.breed = updateData.breed;
-    if (updateData.age) animal.age = updateData.age;
-    if (updateData.adoptionStatus)
-      animal.adoptionStatus = updateData.adoptionStatus;
-    if (updateData.imageUrl) animal.imageUrl = updateData.imageUrl;
 
-    const updatedAnimal = await animal.save();
+    const updateAnimal = await Animal.findByIdAndUpdate(id, req.body);
+
+    await updateAnimal.save();
     res.json({
       message: "pet updated successfully",
-      data: updatedAnimal,
+      data: updateAnimal,
       success: true,
       error: false,
     });
@@ -93,7 +114,6 @@ export const updateAnimal = async (req, res) => {
     });
   }
 };
-
 
 export const deleteAnimal = async (req, res) => {
   try {
@@ -110,3 +130,35 @@ export const deleteAnimal = async (req, res) => {
     });
   }
 };
+
+
+
+export const getFilteredPets = async (req, res) => {
+  try {
+    const { breed, age } = req.query;
+    let filter = { adoptionStatus: 'available' };
+
+    console.log(req.body)
+    if (breed) {
+      filter.breed = breed;
+    }
+
+    if (age) {
+      filter.age = parseInt(age);
+    }
+
+    const pets = await Pet.find(filter);
+    res.status(200).json({
+      data: pets,
+      success: true,
+      error: false,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+      success: false,
+      error: true,
+    });
+  }
+};
+

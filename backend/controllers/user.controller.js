@@ -46,22 +46,19 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const checkemail = await userModel.findOne({ email });
-    // console.log(email);
-    if (!checkemail) {
-      res.status(400).json({
-        message: "User Not exists",
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.status(400).json({
+        message: "User not exists",
         success: false,
         error: true,
       });
     }
 
-    const user = await userModel.findOne({email});
-
     const verifyPassword = await bcryptjs.compare(password, user.password);
     if (!verifyPassword) {
-      res.status(400).json({
-        message: "please check password",
+      return res.status(400).json({
+        message: "Please check password",
         error: true,
         success: false,
       });
@@ -70,16 +67,19 @@ export const login = async (req, res) => {
     const tokenData = {
       id: user._id,
       email: user.email,
+      role: user.role,  // Add role to the token
     };
 
     const token = jwt.sign(tokenData, process.env.SECRET_CODE, {
       expiresIn: "1d",
     });
 
-    // time to store in browser
+    // Set cookie options
     const cookieOptions = {
       httpOnly: true,
-      secure: false,
+      secure: false,  // Set to true if using HTTPS
+      sameSite: 'Strict', // Helps mitigate CSRF attacks
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
     };
 
     res.cookie("token", token, cookieOptions).status(200).json({
@@ -89,7 +89,7 @@ export const login = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    res.status(400).json({
+    return res.status(400).json({
       message: error.message,
       success: false,
       error: true,
@@ -116,16 +116,23 @@ export const userLogout = async (req, res) => {
   }
 };
 
-export const userDetailsController = async (req, res) => {
-  try {
-    const user = await userModel.findById(req.userId);
 
-    res.status(200).json({
-      data: user,
-      success: true,
-      error: false,
-      message: "User Details",
-    });
+export const userDetailsController =async (req, res) => {
+  try {
+    const user = await userModel.findById(req.id).select("-password")
+
+    
+   res.status(200).json({
+      data:user,
+      success:true,
+      error:false,
+      message:"User Details"
+    })
+
+
+
+
+
   } catch (error) {
     res.status(400).json({
       message: error.message,
@@ -134,3 +141,6 @@ export const userDetailsController = async (req, res) => {
     });
   }
 };
+
+
+

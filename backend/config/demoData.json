@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Ruby",
+    "breed": "Cavalier King Charles Spaniel",
+    "age": 3,
+    "adoptionStatus": "available",
+    "imageUrl": "https://cdn11.bigcommerce.com/s-ch33e/images/stencil/1030x500/uploaded_images/picture6.jpg?t=1685509630"
+  },
+  {
+    "name": "Duke",
+    "breed": "Basset Hound",
+    "age": 4,
+    "adoptionStatus": "available",
+    "imageUrl": "https://cdn.britannica.com/87/236687-050-DD7F62CC/basset-hound-dog.jpg"
+  },
+  {
+    "name": "Ginger",
+    "breed": "Bichon Frise",
+    "age": 5,
+    "adoptionStatus": "available",
+    "imageUrl": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTRBatWiMJBPUsXxdzvZrfJshuXYcR2E-7jALxNTkvMUgkW2LFWRm-ZiOWSEJLoKAr2Q0BbeRRV6t0AMF9vefx9mKAjCoEu4FXExtxDpk8"
+  },
+  {
+    "name": "Oscar",
+    "breed": "Chihuahua",
+    "age": 2,
+    "adoptionStatus": "available",
+    "imageUrl": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ3K_uqhYRhW96tiofeWsp3e3JeOm6jg-Cw9jYzpkQTgHxa7ayu"
+  },
+  {
+    "name": "Zoe",
+    "breed": "Pomeranian",
+    "age": 3,
+    "adoptionStatus": "available",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrh4a4ixVz9PEL7XFOBJ_ogkGhIK3IPdNIhAn8p3tuCE57XgEM"
+  },
+  {
+    "name": "Ellie",
+    "breed": "Australian Shepherd",
+    "age": 1,
+    "adoptionStatus": "available",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpXPQcjk7Sl_JDb0DJMdLceGUHfmx-vTcZMNb4di-SHwD2a3SI"
+  },
+  {
+    "name": "Sam",
+    "breed": "Great Dane",
+    "age": 4,
+    "adoptionStatus": "available",
+    "imageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ90HTrJeF6RBWk88jOb1QM-vbKkfZObGfQTlUy0aJrzqGeRXN2u4laUrORdNE3Z3gOG6SjqShbB5OUEiB92FC6_DPBpwgKzd1AnH-cWPA"
+  },
+  {
+    "name": "Maggie",
+    "breed": "Shiba Inu",
+    "age": 2,
+    "adoptionStatus": "available",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Taka_Shiba.jpg/1200px-Taka_Shiba.jpg"
+  }
+]
