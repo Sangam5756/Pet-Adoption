@@ -31,7 +31,7 @@ router.get("/logout",userLogout);
 
 // animal routes
 router.post("/pet/add-animal", authToken, createAnimal);
-router.post("/pet/update-animal", updateAnimal);
+router.put("/pet/update-animal",authToken, updateAnimal);
 router.post("/pet/get-animal",authToken ,getAnimalById);
 router.get("/pet/getall-animal", getAllAnimals);
 router.post("/pet/delete-animal", authToken, deleteAnimal);

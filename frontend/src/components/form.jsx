@@ -30,7 +30,8 @@ const AdoptionForm = () => {
     try {
       const response = await api.post('/api/pet/submit', formData);
       console.log('Application submitted:', response.data);
-      toast.success(response.data.success);
+      
+      toast.success(response.data.message);
       navigate("/")
 
       

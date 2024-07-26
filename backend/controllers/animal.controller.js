@@ -1,8 +1,9 @@
 import Animal from "../models/pet.model.js";
 
+
 export const getAvailableAnimals = async (req, res) => {
   try {
-    const animals = await Animal.find({ adoptionStatus: 'available' });
+    const animals = await Animal.find({ adoptionStatus: "available" });
     res.json({
       data: animals,
       message: "all pets",
@@ -17,7 +18,6 @@ export const getAvailableAnimals = async (req, res) => {
     });
   }
 };
-
 
 export const getAllAnimals = async (req, res) => {
   try {
@@ -36,7 +36,6 @@ export const getAllAnimals = async (req, res) => {
     });
   }
 };
-
 
 export const getAnimalById = async (req, res) => {
   try {
@@ -57,11 +56,10 @@ export const getAnimalById = async (req, res) => {
   }
 };
 
-
 export const createAnimal = async (req, res) => {
-  // const animal = new Animal(req.body);
   
   try {
+    const animal = new Animal(req.body);
     const newAnimal = await animal.save();
 
     res.status(201).json({
@@ -79,19 +77,25 @@ export const createAnimal = async (req, res) => {
   }
 };
 
+
 export const updateAnimal = async (req, res) => {
   const { id } = req.body;
-  const updateData = req.body;
+  const {updateData} = req.body;
+  console.log(req.body)
 
   try {
     const animal = await Animal.findById(id);
+
+    
     if (!animal) {
       return res.status(404).json({ message: "Animal not found" });
     }
 
-    console.log(animal)
+    console.log(animal);
 
-    const updatedAnimal = await Animal.findByIdAndUpdate(id, updateData, { new: true });
+    const updatedAnimal = await Animal.findByIdAndUpdate(id, updateData, {
+      new: true,
+    });
 
     res.json({
       message: "Pet updated successfully",
@@ -108,11 +112,11 @@ export const updateAnimal = async (req, res) => {
   }
 };
 
-
-
 export const deleteAnimal = async (req, res) => {
   try {
-    const animal = await Animal.findById(req.body);
+    const { id } = req.body;
+    console.log(id);
+    const animal = await Animal.findById(id);
     if (!animal) return res.status(404).json({ message: "Animal not found" });
 
     await animal.deleteOne();
@@ -125,9 +129,3 @@ export const deleteAnimal = async (req, res) => {
     });
   }
 };
-
-
-
-
-
-

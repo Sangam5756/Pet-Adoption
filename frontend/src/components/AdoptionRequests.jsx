@@ -67,12 +67,12 @@ const AdoptionRequests = () => {
 
   return (
     <div className="container lg:mx-auto p-4 min-h-[84vh]">
+      <h1 className="text-center font-semibold lg:text-lg mb-5">Adoption Requests</h1>
       
       {
-        requests._id ? (
+        requests ? (
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <h1 className="text-center font-semibold lg:text-lg mb-5">Adoption Requests</h1>
 
         {requests.map((request) => (
           <div key={request?._id} className="p-4 border rounded-lg shadow-md">

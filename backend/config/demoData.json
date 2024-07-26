@@ -54,5 +54,68 @@
     "age": 2,
     "adoptionStatus": "available",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Taka_Shiba.jpg/1200px-Taka_Shiba.jpg"
+  },
+  {
+    "name": "Max",
+    "breed": "Golden Retriever",
+    "age": 3,
+    "adoptionStatus": "adopted",
+    "imageUrl": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ1LBOyfpg-AHpzurumQq0tnuUSjmJVPDzPSxLfLF8_DhCsr_YEaBdNPbQMFwtJmBdeg2ow92i0F026mPrADVqiXl76oAbwB-kBD3i0Qw"
+  },
+  {
+    "name": "Tweety",
+    "breed": "Canary",
+    "age": 1,
+    "adoptionStatus": "available",
+    "imageUrl": "https://static.wikia.nocookie.net/rio/images/e/ea/Yellow_Canary.png/revision/latest?cb=20130726050704"
+  },
+  {
+    "name": "Thumper",
+    "breed": "Dutch Rabbit",
+    "age": 2,
+    "adoptionStatus": "available",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRerewSHU6MFCEuWp9bzrHJhMlhJUixMMXeHw&s"
+  },
+  {
+    "name": "Luna",
+    "breed": "Bengal Cat",
+    "age": 1,
+    "adoptionStatus": "available",
+    "imageUrl": "https://visitseaquest.com/wp-content/uploads/2022/11/unnamed-4.jpg"
+  },
+  {
+    "name": "Buddy",
+    "breed": "Labrador Retriever",
+    "age": 4,
+    "adoptionStatus": "adopted",
+    "imageUrl": "https://example.com/labrador-retriever.jpg"
+  },
+  {
+    "name": "Coco",
+    "breed": "Cockatiel",
+    "age": 2,
+    "adoptionStatus": "available",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwmMZC5YDssqINhCDMGUxWWfZ1KVYpPqoBww&s"
+  },
+  {
+    "name": "Nibbles",
+    "breed": "Hamster",
+    "age": 1,
+    "adoptionStatus": "available",
+    "imageUrl": "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFtc3RlcnxlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    "name": "Shadow",
+    "breed": "Black Cat",
+    "age": 3,
+    "adoptionStatus": "available",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlkcPJmGCkehnqyrLZ5C_cMlXk-DqgDL82Ug&s"
+  },
+  {
+    "name": "Charlie",
+    "breed": "Beagle",
+    "age": 2,
+    "adoptionStatus": "adopted",
+    "imageUrl": "https://image.petmd.com/files/styles/978x550/public/2022-10/beagle-dog.jpg"
   }
 ]

@@ -6,6 +6,7 @@ import Animal from "../models/pet.model.js";
 export const submitApplication = async (req, res) => {
   const { name, email, phone, address, petId } = req.body;
 
+
   try {
     const pet = await Animal.findById(petId);
     if (!pet) {
@@ -24,17 +25,7 @@ export const submitApplication = async (req, res) => {
       petId,
     });
 
-    const checkemail  = await AdoptionApplication.find({email});
     
-
-    if(checkemail){
-      res.status(400).json({
-        message:"Already have requested",
-        error:true,
-        success:false
-      })
-
-    }
 
     const savedApplication = await application.save();
 

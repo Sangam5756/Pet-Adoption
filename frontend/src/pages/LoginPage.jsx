@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const LoginPage = () => {
@@ -30,16 +30,8 @@ const LoginPage = () => {
     }
   };
 
-  const user = useSelector((state) => state?.user?.user); // Ensure correct path
 
 
-  useEffect(() => {
-
-    if (user !== null) {
-      navigate("/admin")
-
-    }
-  }, [])
 
 
 
