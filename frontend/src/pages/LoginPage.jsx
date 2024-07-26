@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -19,7 +20,7 @@ const LoginPage = () => {
         // localStorage.setItem('token', response.data.data)
         navigate("/admin")
         window.location.reload();
-        toast(response.data.message);
+        toast.success(response.data.message);
       }
 
 
@@ -28,6 +29,19 @@ const LoginPage = () => {
       toast.error(response.data.message)
     }
   };
+
+  const user = useSelector((state) => state?.user?.user); // Ensure correct path
+
+
+  useEffect(() => {
+
+    if (user !== null) {
+      navigate("/admin")
+
+    }
+  }, [])
+
+
 
   return (
     <div className="flex items-center max-h-screen min-h-[80vh] justify-center ">

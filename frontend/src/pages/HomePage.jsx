@@ -10,7 +10,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchAnimals = async () => {
       try {
-        const response = await api.get('/api/pet/available');
+        const response = await api.get('/api/pet/getall-animal');
         setAnimals(response.data.data);
       } catch (error) {
         console.error('Error fetching animals:', error);

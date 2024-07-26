@@ -24,6 +24,18 @@ export const submitApplication = async (req, res) => {
       petId,
     });
 
+    const checkemail  = await AdoptionApplication.find({email});
+    
+
+    if(checkemail){
+      res.status(400).json({
+        message:"Already have requested",
+        error:true,
+        success:false
+      })
+
+    }
+
     const savedApplication = await application.save();
 
     res.status(201).json({
@@ -56,6 +68,62 @@ export const getAllAdoptedPets = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       message: error,
+      success: false,
+      error: true,
+    });
+  }
+};
+
+
+export const updateAdoptionRequestStatus = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  console.log(id)
+  console.log(status)
+
+  try {
+    const adoptionRequest = await AdoptionApplication.findById(id).populate("petId");
+    console.log(adoptionRequest)
+    if (!adoptionRequest) return res.status(404).json({ message: "Adoption request not found" });
+
+    
+    adoptionRequest.petId.adoptionStatus = status;
+    adoptionRequest.status = status;
+    const updatedRequest = await adoptionRequest.save();
+
+    console.log("applicationstatus update",updatedRequest)
+    res.json({
+      message: "Adoption request status updated successfully",
+      data: updatedRequest,
+      success: true,
+      error: false,
+    });
+  } catch (err) {
+    res.status(400).json({
+      message: err.message,
+      success: false,
+      error: true,
+    });
+  }
+};
+
+export const removeAdoptionRequest = async (req, res) => {
+  const { id } = req.body;
+  console.log(id)
+
+  try {
+    const request = await AdoptionApplication.findById(id);
+    console.log("fasdfasdfds",request)
+    if (!request) {
+      return res.status(404).json({ message: "Adoption request not found" });
+    }
+
+    await request.deleteOne();
+    res.json({ message: "Adoption request removed" });
+  } catch (err) {
+    res.status(400).json({
+      message: err.message,
       success: false,
       error: true,
     });

@@ -5,6 +5,9 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import Admin from "../pages/Admin";
 import AdoptionForm from "../components/form";
+import AdoptionRequests from "../components/AdoptionRequests";
+import  Available_Animals from "../components/Available_Animals";
+import Managepets from "../components/Managepets";
 
 
 const router = createBrowserRouter([
@@ -17,19 +20,33 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
+        path: "available",
+        element: <Available_Animals />,
+      },
+      {
         path: "login",
-        element:<LoginPage/>
+        element: <LoginPage />
       },
       {
         path: "form",
-        element:<AdoptionForm/>
+        element: <AdoptionForm />
       },
       {
         path: "admin",
-        element:<Admin/>
+        element: <Admin />,
       },
-    
-    
+       {
+        path: "adoption-request",
+        element: <AdoptionRequests />
+      }
+      ,
+       {
+        path: "manage-pets",
+        element: <Managepets />
+      }
+      
+
+
     ],
   },
 ]);

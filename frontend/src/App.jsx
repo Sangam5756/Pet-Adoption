@@ -4,6 +4,7 @@ import api from './services/api';
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "./store/userSlice";
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 

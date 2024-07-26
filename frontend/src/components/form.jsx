@@ -1,6 +1,8 @@
 // In AdoptionForm.jsx
+import { toast } from "react-toastify";
 
 import React, { useState } from 'react';
+
 import api from '../services/api';
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
@@ -13,6 +15,7 @@ const AdoptionForm = () => {
     address: '',
     petId: location.state || '',
   });
+  const navigate = useNavigate();
 
 
   console.log(location.state)
@@ -27,6 +30,11 @@ const AdoptionForm = () => {
     try {
       const response = await api.post('/api/pet/submit', formData);
       console.log('Application submitted:', response.data);
+      toast.success(response.data.success);
+      navigate("/")
+
+      
+
       // Handle successful submission, e.g., show a message, redirect, etc.
     } catch (error) {
       console.error('Submission error:', error);
