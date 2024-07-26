@@ -50,18 +50,7 @@ const AdoptionRequests = () => {
     }
 
   }
-  const user = useSelector((state) => state?.user?.user); // Ensure correct path
-
-  const navigate = useNavigate();
-  console.log(user)
-
-  useEffect(() => {
-
-    if (user === null) {
-      navigate("/login")
-
-    }
-  }, [])
+ 
 
 
 

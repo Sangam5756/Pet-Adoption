@@ -79,10 +79,13 @@ export const updateAdoptionRequestStatus = async (req, res) => {
     if (!adoptionRequest) return res.status(404).json({ message: "Adoption request not found" });
 
     
-    adoptionRequest.petId.adoptionStatus = status;
+    const animalStatus = await Animal.findById(adoptionRequest?.petId);
+    
     adoptionRequest.status = status;
+    animalStatus.adoptionStatus = status
+    await animalStatus.save();
     const updatedRequest = await adoptionRequest.save();
-
+    
     console.log("applicationstatus update",updatedRequest)
     res.json({
       message: "Adoption request status updated successfully",

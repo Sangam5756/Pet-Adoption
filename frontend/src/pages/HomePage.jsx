@@ -11,6 +11,7 @@ const HomePage = () => {
     const fetchAnimals = async () => {
       try {
         const response = await api.get('/api/pet/getall-animal');
+        console.log("all-animals",response)
         setAnimals(response.data.data);
       } catch (error) {
         console.error('Error fetching animals:', error);
