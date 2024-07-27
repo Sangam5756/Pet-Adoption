@@ -80,23 +80,24 @@ export const createAnimal = async (req, res) => {
 
 export const updateAnimal = async (req, res) => {
   const { id } = req.body;
-  const {updateData} = req.body;
-  console.log(req.body)
+  const {updatedData} = req.body;
+  
 
   try {
     const animal = await Animal.findById(id);
 
+    console.log("id from update animal",animal)
     
     if (!animal) {
       return res.status(404).json({ message: "Animal not found" });
     }
 
-    console.log(animal);
-
-    const updatedAnimal = await Animal.findByIdAndUpdate(id, updateData, {
+    
+    const updatedAnimal = await Animal.findByIdAndUpdate(id, updatedData, {
       new: true,
     });
-
+    
+    
     res.json({
       message: "Pet updated successfully",
       data: updatedAnimal,

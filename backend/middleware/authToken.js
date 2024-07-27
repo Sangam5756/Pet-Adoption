@@ -3,12 +3,11 @@ import jwt from "jsonwebtoken";
 export const authToken = async (req, res, next) => {
   try {
     let token = req.cookies?.token || "";   
-    console.log("tokenisautj",token)
 
-    if (!token) {
+if (!token) {
       return res.status(400).json({
         message: "please login",
-      });z
+      });
     }
     
 
@@ -16,9 +15,7 @@ export const authToken = async (req, res, next) => {
       if (err) {
         console.log("err in auth", err);
       }
-      console.log(decode)
       req.id = decode.id;
-      console.log("req.id",req.id)
       
       next();
     });

@@ -1,35 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import api from '../services/api';
 import { ToastContainer, toast } from 'react-toastify';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
+
 
 const LoginPage = () => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  
+
+
+
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/api/login', { email, password }, {
-        withCredentials: true
-      });
+      const response = await api.post('/api/login', { email, password });
+
       console.log('Login successful:', response);
 
-      if (response.data.success) {
-        localStorage.setItem('token', response.data.data)
-        navigate("/admin")
+      if (response?.data?.success) {
+        navigate("/")
         window.location.reload();
         toast.success(response.data.message);
+        
       }
 
 
     } catch (error) {
-
       toast.error(response.data.message)
+ 
     }
-  };
 
+  };
 
 
 
@@ -62,6 +68,7 @@ const LoginPage = () => {
           </div>
           <div className="flex items-center justify-between">
             <button
+            onClick={handleLogin}
               type="submit"
               className="bg-blue-500 ml-0 mx-auto hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >

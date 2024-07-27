@@ -1,27 +1,21 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../services/api';
-import { setUserDetails } from '../store/userSlice';
+import { UserContext } from '../context/UserContext';
 
 const Navbar = () => {
 
-  const user = useSelector((state) => state?.user?.user); // Ensure correct path
-  
+
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { user,logout } = useContext(UserContext)
 
   const handleLogout = async () => {
 
-    const response = api.get("/api/logout", {
-      withCredentials: true
-    })
+    const response = api.get("/api/logout")
 
     console.log(response)
+    logout();
     navigate("/")
-    dispatch(setUserDetails(null))
-    window.location.reload(); 
-    
 
   }
 
@@ -42,7 +36,7 @@ const Navbar = () => {
           <Link to="/login">login</Link>
 
         }
-       
+
         {
           user &&
           <p className=' cursor-pointer' onClick={handleLogout}>Logout</p>

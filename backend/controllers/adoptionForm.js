@@ -6,7 +6,6 @@ import Animal from "../models/pet.model.js";
 export const submitApplication = async (req, res) => {
   const { name, email, phone, address, petId } = req.body;
 
-
   try {
     const pet = await Animal.findById(petId);
     if (!pet) {
@@ -24,8 +23,6 @@ export const submitApplication = async (req, res) => {
       address,
       petId,
     });
-
-    
 
     const savedApplication = await application.save();
 
@@ -46,9 +43,8 @@ export const submitApplication = async (req, res) => {
 
 export const getAllAdoptedPets = async (req, res) => {
   try {
-    const response = await AdoptionApplication.find().populate('petId');
-    console.log(response)
-
+    const response = await AdoptionApplication.find().populate("petId");
+    console.log(response);
 
     res.status(200).json({
       data: response,
@@ -65,34 +61,38 @@ export const getAllAdoptedPets = async (req, res) => {
   }
 };
 
-
 export const updateAdoptionRequestStatus = async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
 
-  console.log(id)
-  console.log(status)
-
   try {
-    const adoptionRequest = await AdoptionApplication.findById(id).populate("petId");
-    console.log(adoptionRequest)
-    if (!adoptionRequest) return res.status(404).json({ message: "Adoption request not found" });
+    const adoptionRequest = await AdoptionApplication.findById(id).populate(
+      "petId"
+    );
 
-    
+    if (!adoptionRequest)
+      return res.status(404).json({ message: "Adoption request not found" });
+
     const animalStatus = await Animal.findById(adoptionRequest?.petId);
-    
-    adoptionRequest.status = status;
-    animalStatus.adoptionStatus = status
-    await animalStatus.save();
-    const updatedRequest = await adoptionRequest.save();
-    
-    console.log("applicationstatus update",updatedRequest)
-    res.json({
-      message: "Adoption request status updated successfully",
-      data: updatedRequest,
-      success: true,
-      error: false,
-    });
+    if (animalStatus.adoptionStatus == "adopted") {
+      res.status(400).json({
+        message: "Pet already adopted",
+        success: false,
+        error: true,
+      });
+    } else {
+      animalStatus.adoptionStatus = status;
+      adoptionRequest.status = status;
+      await animalStatus.save();
+      const updatedRequest = await adoptionRequest.save();
+
+      res.json({
+        message: "Adoption request status updated successfully",
+        data: updatedRequest,
+        success: true,
+        error: false,
+      });
+    }
   } catch (err) {
     res.status(400).json({
       message: err.message,
@@ -104,11 +104,11 @@ export const updateAdoptionRequestStatus = async (req, res) => {
 
 export const removeAdoptionRequest = async (req, res) => {
   const { id } = req.body;
-  console.log(id)
+  console.log(id);
 
   try {
     const request = await AdoptionApplication.findById(id);
-    console.log("fasdfasdfds",request)
+    console.log("fasdfasdfds", request);
     if (!request) {
       return res.status(404).json({ message: "Adoption request not found" });
     }

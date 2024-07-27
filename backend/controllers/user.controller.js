@@ -77,8 +77,9 @@ export const login = async (req, res) => {
     // Set cookie options
     const cookieOptions = {
       httpOnly: true,
-      secure: false,  // Set to true if using HTTPS
-      sameSite: 'Strict', // Helps mitigate CSRF attacks
+      secure: true,  // Set to true if using HTTPS
+      sameSite: 'None', // Required for cross-site cookies
+
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     };
 
@@ -99,7 +100,16 @@ export const login = async (req, res) => {
 
 export const userLogout = async (req, res) => {
   try {
-    res.clearCookie("token");
+     const cookieOptions = {
+      httpOnly: true,
+      secure: true,
+ sameSite: 'None',
+    };
+
+    return res.cookie("token",'', cookieOptions).status(200).json({
+      message: "session-out",
+      success: true,
+    });
 
     res.status(200).json({
       message: "user logout successfully",

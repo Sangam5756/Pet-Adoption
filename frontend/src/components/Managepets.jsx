@@ -1,23 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EditPetModal from './EditPetModal';
 import AddPetModal from "./AddPetModal"
+import { UserContext } from '../context/UserContext';
 const ManagePets = () => {
-    const user = useSelector((state) => state?.user?.user); // Ensure correct path
+    
     const navigate = useNavigate();
     const [pets, setPets] = useState([]);
     const [selectedPet, setSelectedPet] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const { user,fetchUser } = useContext(UserContext)
 
-    console.log("user in managepets",user)
+  console.log("USERINMANAGFEPETS",user)
+
+  
+  useEffect(() => {
+    if(window.location.reload){
+
+        fetchUser()
+    }
+
+  }, [])
+
 
     useEffect(() => {
-        if (user === null) {
+        if (!user) {
             navigate("/login");
         } else {
             fetchPets();
