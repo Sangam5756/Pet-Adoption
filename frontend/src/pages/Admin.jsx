@@ -43,7 +43,7 @@ const Admin = () => {
       <div className='min-h-[84vh] bg-slate-100 flex item-center text-center  justify-center'>
       
         
-        <div className='flex justify-center    items-center '>
+        <div className='flex justify-center lg:flex-row flex-col   items-center '>
           <div className=' shadow-2xl rounded flex items-center m-4 p-4 h-32 duration-300 hover:bg-red-400   shadow-black '>
             <Link className='' to={"/adoption-request"}>Adoption-request</Link>
           </div>
