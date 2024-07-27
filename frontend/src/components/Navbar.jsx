@@ -29,8 +29,8 @@ const Navbar = () => {
   return (
     <div>
       <nav className=' bg-slate-200  flex items-center justify-between gap-6 p-2 px-10 ml-0 mx-auto text-black '>
-        <Link to="/">Home</Link>
-        <Link to="/available">Available</Link>
+        <Link className=' rounded-sm px-2 py-1' to="/">Home</Link>
+        <Link className=' rounded-sm px-2 py-1' to="/available">Available</Link>
 
         {
           user &&
