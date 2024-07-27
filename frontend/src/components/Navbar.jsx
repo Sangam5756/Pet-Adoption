@@ -7,7 +7,7 @@ import { setUserDetails } from '../store/userSlice';
 const Navbar = () => {
 
   const user = useSelector((state) => state?.user?.user); // Ensure correct path
-
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

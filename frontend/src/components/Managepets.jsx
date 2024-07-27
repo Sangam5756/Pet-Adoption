@@ -21,7 +21,7 @@ const ManagePets = () => {
         } else {
             fetchPets();
         }
-    }, [user]);
+    }, []);
 
     const fetchPets = async () => {
         try {

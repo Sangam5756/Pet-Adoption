@@ -21,6 +21,7 @@ const App = () => {
     });
 
     console.log("app jsx data", dataResponse)
+    localStorage.setItem('email',dataResponse.email)
     const data = dataResponse.data.data;
 
 

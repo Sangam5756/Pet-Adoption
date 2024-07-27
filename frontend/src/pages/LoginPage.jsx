@@ -17,9 +17,9 @@ const LoginPage = () => {
       console.log('Login successful:', response);
 
       if (response.data.success) {
-        // localStorage.setItem('token', response.data.data)
+        localStorage.setItem('token', response.data.data)
         navigate("/admin")
-        window.location.reload();
+        // window.location.reload();
         toast.success(response.data.message);
       }
 
