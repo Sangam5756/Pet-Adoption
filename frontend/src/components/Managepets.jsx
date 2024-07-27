@@ -16,9 +16,8 @@ const ManagePets = () => {
 
 
     useEffect(() => {
-        if (user === null) {
-            navigate("/login");
-        } else {
+            
+    if{
             fetchPets();
         }
     }, []);
