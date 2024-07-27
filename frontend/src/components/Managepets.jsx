@@ -14,12 +14,14 @@ const ManagePets = () => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
+    console.log("user in managepets",user)
 
     useEffect(() => {
-            
-    
+        if (user === null) {
+            navigate("/login");
+        } else {
             fetchPets();
-    
+        }
     }, []);
 
     const fetchPets = async () => {

@@ -1,14 +1,39 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
+import api from '../services/api';
 
 
 const Admin = () => {
 
-  const user = useSelector((state) => state?.user?.user); // Ensure correct path
+  const [data, setData] = useState(null);
 
+  const fetchUserDetails = async () => {
+
+    const dataResponse = await api.get('/api/get-user', {
+      withCredentials: true
+    });
+
+    const data = dataResponse.data.data;
+
+
+    if (dataResponse.data.success) {
+      setData(dataResponse?.data?.data);
+    }
+  };
+
+  console.log("data", data)
   const navigate = useNavigate();
-  console.log(user)
+
+  useEffect(() => {
+   fetchUserDetails();
+   
+
+
+
+
+  }, [data])
+
 
 
 
