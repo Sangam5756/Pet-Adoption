@@ -17,10 +17,9 @@ const ManagePets = () => {
 
     useEffect(() => {
             
-        
-    if{
+    
             fetchPets();
-        }
+    
     }, []);
 
     const fetchPets = async () => {
