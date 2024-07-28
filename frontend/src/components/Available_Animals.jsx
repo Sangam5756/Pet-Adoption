@@ -16,7 +16,7 @@ const Available_Animals = () => {
         const response = await api.get('/api/pet/available');
         setAnimals(response.data.data);
         if(response.data.success){
-          setTimeout(() => setLoader(false), 2000); // 500ms delay
+          setTimeout(() => setLoader(false), 500); // 500ms delay
 
         }
 

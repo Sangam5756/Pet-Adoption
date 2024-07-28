@@ -3,19 +3,30 @@ import api from "../services/api";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { UserContext, UserProvider } from "../context/UserContext";
+import Loading from "./Loading";
 
 const AdoptionRequests = () => {
   const [requests, setRequests] = useState([]);
   const [deleterequest, setDelete] = useState(false)
+  const [loader, setLoader] = useState(false);
+
 
   const { user,fetchUser} = useContext(UserContext)
   const navigate = useNavigate();
 
   const fetchRequests = async () => {
     try {
+      setLoader(true);
+
       const response = await api.get("/api/pet/adopted");
       setRequests(response.data.data);
+      if(response.data.success){
+        setTimeout(() => setLoader(false), 500); // 500ms delay
+
+      }
     } catch (error) {
+      setLoader(false);
+
       console.error("Error fetching adoption requests:", error);
     }
   };
@@ -72,13 +83,15 @@ const AdoptionRequests = () => {
 
 
   return (
-    <div className="container lg:mx-auto p-4 min-h-[84vh]">
+    <div className="container lg:mx-auto p-4 min-h-[88vh]">
       <h1 className="text-center font-semibold lg:text-lg mb-5">Adoption Requests</h1>
 
       {
-        requests ? (
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        loader ? (
+          (<Loading/>)
+          
+        ) :
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
             {requests.map((request) => (
               <div key={request?._id} className="p-4 border rounded-lg shadow-md">
@@ -108,7 +121,6 @@ const AdoptionRequests = () => {
               </div>
             ))}
           </div>
-        ) : (<p className="text-center m-5">No Request are Found</p>)
       }
     </div>
   );

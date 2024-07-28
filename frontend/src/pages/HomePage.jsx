@@ -15,7 +15,7 @@ const HomePage = () => {
         const response = await api.get('/api/pet/getall-animal');
         console.log("all-animals", response)
         setAnimals(response.data.data);
-        setTimeout(() => setLoader(false), 4000); // 500ms delay
+        setTimeout(() => setLoader(false), 500); // 500ms delay
       } catch (error) {
         console.error('Error fetching animals:', error);
         setLoader(false);

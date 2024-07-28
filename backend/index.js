@@ -11,7 +11,6 @@ import path from "path";
 const PORT = process.env.PORT || 5001;
 const app = express();
 
-const allowedOrigins = ['http://localhost:5173', 'https://petfriend5756.onrender.com'];
 
 
 app.use(express.json());
@@ -31,9 +30,9 @@ app.use("/api", router);
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-app.use("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
-});
+// app.use("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+// });
 
 
 
