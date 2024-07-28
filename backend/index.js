@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(
   cors({
     // origin: "http://localhost:5173", // Your frontend URL
-    origin: process.env.FRONTEND_URL || "http://localhost:5173", // Your frontend URL
+    origin: ["http://localhost:5173", process.env.FRONTEND_URL, "https://petfriend5756.onrender.com"],// Your frontend URLs // Your frontend URL
     // optionsSuccessStatus: 200,
     credentials: true,
   })
