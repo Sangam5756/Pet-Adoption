@@ -16,6 +16,7 @@ const AddPetModal = ({ onClose, onSubmit }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         onSubmit(formData);
         onClose();
     };

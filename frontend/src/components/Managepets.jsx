@@ -118,70 +118,73 @@ const ManagePets = () => {
     return (
         <div className="container lg:mx-auto p-4 min-h-[88vh]">
             {
-                loader ? (<Loading />) : 
-                
-                (
+                loader ? (<Loading />) :
 
-                    <div>
-                        <h1 className="text-center font-semibold lg:text-lg mb-5">Manage Pets</h1>
-                        <div className="flex justify-end mb-4">
-                            <button
-                                className="px-3 py-2 bg-green-500 hover:bg-green-700 text-white rounded"
-                                onClick={() => setIsAddModalOpen(true)}
-                            >
-                                Add Pet
-                            </button>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {pets.map((pet) => (
-                                <div key={pet._id} className="p-4 border rounded-lg shadow-md">
-                                    <h2 className="font-semibold">{pet.name}</h2>
-                                    <img src={pet.imageUrl} alt={pet.name} className="w-full h-48 object-cover" />
-                                    <p>Breed: {pet.breed}</p>
-                                    <p>Age: {pet.age}</p>
-                                    <p>Status: {pet.adoptionStatus}</p>
-                                    <div className="mt-2 flex justify-between items-center">
-                                        <button
-                                            className="px-2 py-1 bg-red-600 hover:bg-red-800 text-white rounded"
-                                            onClick={() => handleDeletePet(pet._id)}
-                                        >
-                                            Delete
-                                        </button>
-                                        <button
-                                            className="px-2 py-1 bg-blue-500 hover:bg-blue-700 text-white rounded"
-                                            onClick={() => handleUpdatePet(pet._id, { adoptionStatus: 'adopted' })}
-                                        >
-                                            Mark as Adopted
-                                        </button>
-                                        <button
-                                            className="px-2 py-1 bg-yellow-500 hover:bg-yellow-700 text-white rounded"
-                                            onClick={() => handleEditClick(pet)}
-                                        >
-                                            Edit
-                                        </button>
-                                    </div>
+                    (
+
+                        <div>
+                            <div className="">
+
+                                <div><h1 className="text-center font-semibold lg:text-lg ">Manage Pets</h1></div>
+                                <div className='flex justify-end mb-4'>
+                                    <button
+                                        className="px-3 py-2 bg-green-500 hover:bg-green-700 text-white rounded"
+                                        onClick={() => setIsAddModalOpen(true)}
+                                    >
+                                        Add Pet
+                                    </button>
                                 </div>
-                            ))}
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {pets.map((pet) => (
+                                    <div key={pet._id} className="p-4 border rounded-lg shadow-md">
+                                        <h2 className="font-semibold">{pet.name}</h2>
+                                        <img src={pet.imageUrl} alt={pet.name} className="w-full h-48 object-cover" />
+                                        <p>Breed: {pet.breed}</p>
+                                        <p>Age: {pet.age}</p>
+                                        <p>Status: {pet.adoptionStatus}</p>
+                                        <div className="mt-2 flex justify-between items-center">
+                                            <button
+                                                className="px-2 py-1 bg-red-600 hover:bg-red-800 text-white rounded"
+                                                onClick={() => handleDeletePet(pet._id)}
+                                            >
+                                                Delete
+                                            </button>
+                                            <button
+                                                className="px-2 py-1 bg-blue-500 hover:bg-blue-700 text-white rounded"
+                                                onClick={() => handleUpdatePet(pet._id, { adoptionStatus: 'adopted' })}
+                                            >
+                                                Mark as Adopted
+                                            </button>
+                                            <button
+                                                className="px-2 py-1 bg-yellow-500 hover:bg-yellow-700 text-white rounded"
+                                                onClick={() => handleEditClick(pet)}
+                                            >
+                                                Edit
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            {isEditModalOpen && (
+                                <EditPetModal
+                                    pet={selectedPet}
+                                    onClose={() => setIsEditModalOpen(false)}
+                                    onSubmit={handleEditSubmit}
+                                    loader={loader}
+                                />
+                            )}
+                            {isAddModalOpen && (
+                                <AddPetModal
+                                    onClose={() => setIsAddModalOpen(false)}
+                                    onSubmit={handleAddPet}
+                                    loader={loader}
+                                />
+                            )}
                         </div>
-                        {isEditModalOpen && (
-                            <EditPetModal
-                                pet={selectedPet}
-                                onClose={() => setIsEditModalOpen(false)}
-                                onSubmit={handleEditSubmit}
-                                loader ={loader}
-                            />
-                        )}
-                        {isAddModalOpen && (
-                            <AddPetModal
-                                onClose={() => setIsAddModalOpen(false)}
-                                onSubmit={handleAddPet}
-                                loader={loader}
-                            />
-                        )}
-                    </div>
 
 
-                )
+                    )
             }
         </div>
 

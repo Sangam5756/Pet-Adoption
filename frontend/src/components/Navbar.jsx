@@ -13,7 +13,7 @@ const Navbar = () => {
 
     const response = api.get("/api/logout")
 
-    console.log(response)
+    console.log("Logout",response)
     logout();
     navigate("/")
 

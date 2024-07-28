@@ -24,7 +24,7 @@ const LoginPage = () => {
 
       if (response?.data?.success) {
         navigate("/")
-        window.location.reload();
+        // window.location.reload();
         toast.success(response.data.message);
         
       }
